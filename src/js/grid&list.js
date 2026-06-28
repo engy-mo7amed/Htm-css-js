@@ -23,14 +23,15 @@ function changeViewLayout(viewType) {
       const img = card.querySelector("img");
 
       if (imageWrapper) {
-        imageWrapper.className = "meal-image relative h-48 overflow-hidden bg-gray-100";
+        imageWrapper.className =
+          "meal-image relative h-48 overflow-hidden bg-gray-100";
       }
 
       if (img) {
-        img.className = "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500";
+        img.className =
+          "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500";
       }
     });
-
   } else {
     recipesGrid.className = "grid grid-cols-2 gap-5";
 
@@ -46,7 +47,8 @@ function changeViewLayout(viewType) {
       const img = card.querySelector("img");
 
       if (imageWrapper) {
-        imageWrapper.className = "meal-image relative w-44 h-full flex-shrink-0 overflow-hidden bg-gray-100";
+        imageWrapper.className =
+          "meal-image relative w-44 h-full flex-shrink-0 overflow-hidden bg-gray-100";
       }
 
       if (img) {

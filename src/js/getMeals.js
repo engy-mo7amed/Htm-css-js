@@ -17,15 +17,15 @@ export async function getMeals(meal) {
     <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600"></div>
     </div>
     `;
-    let response = await fetch(
+    const response = await fetch(
       `https://nutriplan-api.vercel.app/api/meals/search?q=${meal}&page=1&limit=25`,
       {
         method: "GET",
         redirect: "follow",
       },
     );
-    let data = await response.json();
-    let finalData = data.results;
+    const data = await response.json();
+    const finalData = data.results;
     displayMeals(finalData);
   } catch (error) {
     console.log(error);
@@ -40,10 +40,10 @@ export function displayMeals(data) {
     box += `
             <div class="recipe-card bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer group" data-id="${data[i].id}">
               
-              <!-- Image Container - ثابت في Grid و List -->
+              <!-- Image Container -->
               <div class="meal-image relative overflow-hidden bg-gray-100">
                 <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                     src="${data[i].thumbnail}" alt="${data[i].name}" loading="lazy">
+                    src="${data[i].thumbnail}" alt="${data[i].name}" loading="lazy">
                 
                 <div class="absolute bottom-3 left-3 flex gap-2">
                   <span class="px-2 py-1 bg-white/90 backdrop-blur-sm text-xs font-semibold rounded-full text-gray-700">${data[i].category}</span>

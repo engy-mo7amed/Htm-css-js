@@ -3,11 +3,11 @@ import * as AllCategories from "./getCategories.js";
 import { getAreas } from "./getAreas.js";
 import * as gridListView from "./grid&list.js";
 import * as sideBar from "./sideBar.js";
-import * as MealDetails from "./details.js";
-import { initFoodLog} from "./log.js";
-import { initProducts } from "./product.js"
+import { getDetails } from "./details.js";
+import { initFoodLog } from "./log.js";
+import { initProducts } from "./product.js";
 
-initProducts()
+initProducts();
 initFoodLog();
 getMeals.getMeals("chicken");
 AllCategories.getAllCategories();
@@ -71,9 +71,42 @@ if (areaBtnContainer) {
   });
 }
 
+/////////////////details section ///////////////////////////
 
+const searchSection = document.getElementById("search-filters-section");
+const mealSection = document.getElementById("meal-categories-section");
+const recipeSection = document.getElementById("all-recipes-section");
+const recipesGrid = document.getElementById("recipes-grid");
+const mealDetailsSection = document.getElementById("meal-details");
 
+if (recipesGrid) {
+  recipesGrid.addEventListener("click", async (e) => {
+    const clickedCard = e.target.closest(".recipe-card");
 
+    if (clickedCard) {
+      const mealId = clickedCard.dataset.id;
 
+      if (mealId) {
+        await getDetails(mealId);
 
+        if (searchSection) searchSection.classList.add("hidden");
+        if (mealSection) mealSection.classList.add("hidden");
+        if (recipeSection) recipeSection.classList.add("hidden");
+        if (mealDetailsSection) mealDetailsSection.classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+  });
+}
 
+if (mealDetailsSection) {
+  mealDetailsSection.addEventListener("click", (e) => {
+    const backBtn = e.target.closest("#back-to-meals-btn");
+    if (backBtn) {
+      if (mealSection) mealSection.classList.remove("hidden");
+      if (recipeSection) recipeSection.classList.remove("hidden");
+      if (searchSection) searchSection.classList.remove("hidden");
+      if (mealDetailsSection) mealDetailsSection.classList.add("hidden");
+    }
+  });
+}
